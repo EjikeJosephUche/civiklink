@@ -8,6 +8,7 @@ const UserSchema: Schema = new Schema(
 		lastName: { type: String, required: true },
 		password: { type: String, required: true },
 		email: { type: String, required: true, unique: true },
+        verificationStatus: { type: Boolean, default: false }, // Default is false (not verified)
 		role: {
 			type: String,
 			enum: ["ADMIN", "OFFICIAL", "CITIZEN"], // Define the roles available in the system
