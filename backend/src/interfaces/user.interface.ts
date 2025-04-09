@@ -2,9 +2,12 @@ import { Document } from "mongoose";
 
 interface IUser extends Document {
   username: string;
+  firstName: string;
+  lastName: string;
   password: string;
   email: string;
   role: string; // e.g., 'admin', 'user'
+  verificationStatus: boolean; // e.g., true for verified, false for not verified
   createdAt?: Date;
   updatedAt?: Date;
 }
