@@ -1,22 +1,56 @@
-// server.js
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import dotenv from "dotenv";
 import connectDB from "./config/db";
 
 dotenv.config();
-connectDB(); // Connect to MongoDB
-
 const app = express();
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
-// Middleware
-app.use(express.json()); // To parse JSON bodies
-app.use(cors()); // Enable CORS for all routes
+/* Cors Options configuaration*/
 
-// Routes
-// app.use("/api/government", governmentRoutes);
-// app.use("/api/auth", authRoutes);
+const corsOptions = {
+	origin: process.env.CLIENT_URL,
+	credentials: true,
+	methods: ["GET", "POST", "PUT", "DELETE"],
+	allowedHeaders: ["Content-Type", "Authorization"],
+	exposedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+
+/* Middleware Registration */
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+
+// Connect to database and start server
+connectDB().then(() => {
+	startServer(port);
 });
+
+
+
+
+function startServer(port: number) {
+	const server = app.listen(port, () => {
+		console.log(`Server is running on port ${port}`);
+	});
+
+	server.on("error", (err: any) => {
+		if (err.code === "EADDRINUSE") {
+			let newPort = port + 1;
+			console.error(`Port ${port} is already in use.`);
+			console.log(`Trying to start server on Port ${newPort}`);
+			startServer(newPort);
+		} else {
+			console.error("An error occurred: ", err);
+			process.exit(1);
+		}
+	});
+}
+
+
+
