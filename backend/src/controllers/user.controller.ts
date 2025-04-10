@@ -88,7 +88,7 @@ export default class UserController {
                     res.status(200).send({
                         success: true,
                         message: "Login successful as citizen",
-                        // data: { email: user.email, token },
+                        
                     });
                 }
                 if (userOfficial && userOfficial.role === role) {
@@ -96,7 +96,6 @@ export default class UserController {
                     res.status(200).send({
                         success: true,
                         message: "Login successful as user",
-                        // data: { email: user.email, token },
                     });
                 }
             }
