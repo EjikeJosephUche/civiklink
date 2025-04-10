@@ -1,8 +1,21 @@
-import { paginate } from "./../utils/helpers";
+import { encryptPassword, paginate } from "./../utils/helpers";
 import IUser from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
 
 export class CitizenService {
+	async registerCitizen(data: Partial<IUser>) {
+		// Logic to register a new citizen in the database
+		const { username, firstName, lastName, email, password } = data;
+		const encryptedPassword = await encryptPassword(password as string);
+		return await UserModel.create({
+			username,
+			firstName,
+			lastName,
+			email,
+			password: encryptedPassword,
+		});
+	}
+
 	async getCitizenDetails(email: string) {
 		// Logic to fetch citizen details from the database
 		return await UserModel.findOne({ email, role: "CITIZEN" });

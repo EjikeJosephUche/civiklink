@@ -3,6 +3,10 @@ import OfficialModel from "../models/official.model";
 import { CitizenService } from "./citizen.service";
 
 export default class OfficialService {
+	async registerOfficial(data: Partial<IOfficial>) {
+		// Logic to register a new official in the database
+		return await OfficialModel.create(data);
+	}
 	async getAllOfficialsDetails() {
 		return await OfficialModel.find({ role: "OFFICIAL" });
 	}
