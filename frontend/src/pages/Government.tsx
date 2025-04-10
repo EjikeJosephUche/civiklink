@@ -1,15 +1,2 @@
-import { GovBtnSection } from "../components/sections/GovBtnSection";
-import { GovCardsSection } from "../components/sections/GovCardsSection";
-import { GovOne } from "../components/sections/GovOne";
-
-const Government = () => {
- return (
-  <>
-  <GovOne />
-  <GovCardsSection />
-  <GovBtnSection />
-  </>
-  
- );
-};
+const Government = () => <h2>Welcome to the Government Page</h2>;
 export default Government;
