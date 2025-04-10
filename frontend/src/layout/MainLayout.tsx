@@ -7,6 +7,7 @@ const MainLayout = () => (
     <Navbar />
     <main style={{ padding: '2rem', minHeight: '80vh' }}>
       <Outlet />
+    
     </main>
     <Footer />
   </>
