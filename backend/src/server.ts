@@ -13,11 +13,11 @@ const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 /* Cors Options configuaration*/
 
 const corsOptions = {
-	// origin: process.env.CLIENT_URL,
+	origin: process.env.CLIENT_URL,
 	credentials: true,
-	// methods: ["GET", "POST", "PUT", "DELETE"],
-	// allowedHeaders: ["Content-Type", "Authorization"],
-	// exposedHeaders: ["Content-Type", "Authorization"],
+	methods: ["GET", "POST", "PUT", "DELETE"],
+	allowedHeaders: ["Content-Type", "Authorization"],
+	exposedHeaders: ["Content-Type", "Authorization"],
 };
 
 
