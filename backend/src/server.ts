@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import { reqLogger } from "./middlewares/logger.middleware";
+import router from "./routes/router";
+import { clientError, notFound } from "./middlewares/errorHandler.middleware";
 
 dotenv.config();
 const app = express();
@@ -10,11 +13,11 @@ const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 /* Cors Options configuaration*/
 
 const corsOptions = {
-	origin: process.env.CLIENT_URL,
+	// origin: process.env.CLIENT_URL,
 	credentials: true,
-	methods: ["GET", "POST", "PUT", "DELETE"],
-	allowedHeaders: ["Content-Type", "Authorization"],
-	exposedHeaders: ["Content-Type", "Authorization"],
+	// methods: ["GET", "POST", "PUT", "DELETE"],
+	// allowedHeaders: ["Content-Type", "Authorization"],
+	// exposedHeaders: ["Content-Type", "Authorization"],
 };
 
 
@@ -23,6 +26,20 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// For parsing JSON data
+app.use(express.json());
+
+// For logging requests
+app.use(reqLogger);
+
+// Routes
+app.use("/", router());
+
+// Not found Error handling
+app.use(notFound);
+
+// Client Error handling
+app.use(clientError);
 
 
 

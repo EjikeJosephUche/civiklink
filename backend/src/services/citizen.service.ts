@@ -1,11 +1,25 @@
-import { paginate } from './../utils/helpers';
+import { encryptPassword, paginate } from "./../utils/helpers";
 import IUser from "../interfaces/user.interface";
-import UserModel from "../models/user.model";
+import CitizenModel from "../models/citizen.model";
+import OfficialModel from "../models/official.model";
 
 export class CitizenService {
+	async registerCitizen(data: Partial<IUser>) {
+		// Logic to register a new citizen in the database
+		const { username, firstName, lastName, email, password } = data;
+		const encryptedPassword = await encryptPassword(password as string);
+		return await CitizenModel.create({
+			username,
+			firstName,
+			lastName,
+			email,
+			password: encryptedPassword,
+		});
+	}
+
 	async getCitizenDetails(email: string) {
 		// Logic to fetch citizen details from the database
-		return await UserModel.findOne({ email, role: "CITIZEN" });
+		return await CitizenModel.findOne({ email, role: "CITIZEN" });
 	}
 
 	async updateCitizenDetails(
@@ -15,7 +29,7 @@ export class CitizenService {
 		data: Partial<IUser>
 	) {
 		// Logic to update citizen details in the database
-		return await UserModel.findOneAndUpdate(
+		return await CitizenModel.findOneAndUpdate(
 			{ email, _id: userId, role },
 			data,
 			{ new: true, runValidators: true } // Return the updated document and run validators
@@ -24,28 +38,28 @@ export class CitizenService {
 
 	async deleteCitizen(email: string, userId: string, role: String) {
 		// Logic to delete a citizen from the database
-		return await UserModel.findOneAndDelete({
+		return await CitizenModel.findOneAndDelete({
 			email,
 			_id: userId,
 			role,
 		});
 	}
 
-	async getAllOfficials() {
+	async getAllOfficials(page: number, limit: number) {
 		// Logic to fetch all officials from the database
-		return await UserModel.find({ role: "OFFICIAL" });
+		return await paginate(OfficialModel, page, limit, { role: "OFFICIAL" });
 	}
 
 	async getOfficialsBySearch(searchWord: string, page: number, limit: number) {
 		// Logic to fetch officials by department from the database
-        const query = {
-            $or:[
-                { role: "OFFICIAL" },
-                { department: { $regex: searchWord, options: "i" }},
-                { name: { $regex: searchWord, options: "i" }}
-            
-            ]
-        }
-		return await paginate(UserModel, page, limit, query);
+		const query = {
+			$or: [
+				{ role: "OFFICIAL" },
+				{ department: { $regex: searchWord, options: "i" } },
+				{ name: { $regex: searchWord, options: "i" } },
+				{ position: { $regex: searchWord, options: "i" } },
+			],
+		};
+		return await paginate(OfficialModel, page, limit, query);
 	}
 }
