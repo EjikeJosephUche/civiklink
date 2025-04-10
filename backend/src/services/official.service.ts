@@ -5,12 +5,14 @@ import { encryptPassword } from "../utils/helpers";
 export default class OfficialService {
 	async registerOfficial(data: Partial<IOfficial>) {
 		// Logic to register a new official in the database
-		const { name, email, password, department, contactInfo } = data;
+		const { name, email, password, description, position, department, contactInfo } = data;
 		const encryptedPassword = await encryptPassword(password as string);
 		return await OfficialModel.create({
 			name,
             email,
 			password: encryptedPassword,
+            description,
+            position,
             department,
             contactInfo,
 		});

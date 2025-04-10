@@ -15,6 +15,7 @@ const officialSchema: Schema = new Schema(
 			required: true,
 		},
     position: { type: String, required: true },
+    description: { type: String, required: true },
 		department: { type: String, required: true },
 		contactInfo: { type: String, required: true },
 	},
@@ -22,9 +23,11 @@ const officialSchema: Schema = new Schema(
     toJSON: {
         transform: function (doc, ret) {
           return {
+            _id: ret._id,
             name: ret.name,
             department: ret.department,
             position: ret.position,
+            description: ret.description,
             contactInfo: ret.contactInfo,
             createdAt: ret.createdAt,
             updatedAt: ret.updatedAt,

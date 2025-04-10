@@ -5,7 +5,7 @@ import { CitizenService } from "../services/citizen.service";
 import OfficialService from "../services/official.service";
 
 const { getCitizenDetails, registerCitizen } = new CitizenService();
-const { getOfficialDetails } = new OfficialService();
+const { getOfficialDetails, registerOfficial } = new OfficialService();
 
 export default class UserController {
 	async registerCitizen(req: Request, res: Response, next: NextFunction) {
@@ -39,13 +39,32 @@ export default class UserController {
 		}
 	}
 
-	async registerOfficial(req: AuthRequest, res: Response, next: NextFunction) {
-		const data = req.body;
+	async registerOfficial(req: Request, res: Response, next: NextFunction) {
+		
 		try {
-			console.log("Admin data", data);
-			console.log("Admin data type", typeof data);
-			res.status(201).json({ message: "Admin registered successfully" });
+            const {name, email, password, position, description, department, contactInfo } = req.body;
+			const user = await getOfficialDetails(email);
+            if (user) {
+                return next(new HttpError(409, "Official already exists"));
+            }
+
+            // Logic to register a new official in the database
+            const newOfficial = await registerOfficial({
+                name,
+                email,
+                password,
+                position,
+                description,
+                department,
+                contactInfo,
+            });
+
+            if (!newOfficial) {
+                return next(new HttpError(500, "Official registration failed"));
+            }
+            res.status(201).json({ success: true, message: "Official registered successfully" });
 		} catch (error) {
+            console.error("Error in registerOfficial:", error);
 			return next(new HttpError(500, "Internal Server Error"));
 		}
 	}

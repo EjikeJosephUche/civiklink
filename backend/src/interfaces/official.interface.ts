@@ -6,6 +6,7 @@ interface IOfficial extends Document {
   password: string;
   role: string;
   position: string;
+  description: string,
   department: string;
   contactInfo: string;
 }
