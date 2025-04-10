@@ -16,8 +16,8 @@ const UserSchema: Schema = new Schema(
 			required: true,
 		}, 
 	},
-	{ timestamps: true } // Automatically add createdAt and updatedAt fields
+	{ timestamps: true} // Automatically add createdAt and updatedAt fields
 );
-const UserModel = model<IUser>("Users", UserSchema);
-export default UserModel;
-// This code defines a Mongoose schema and model for a User entity in a MongoDB database.
+const CitizenModel = model<IUser>("Citizens", UserSchema);
+export default CitizenModel;
+// This code defines a Mongoose schema and model for a Citizen entity in a MongoDB database.

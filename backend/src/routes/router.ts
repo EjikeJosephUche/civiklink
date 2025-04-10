@@ -1,10 +1,10 @@
 import { Router } from "express";
+import authRoutes from "./user.routes"
 
 const router = Router();
 
 export default ():Router => {
 
-    //TODO : Add routes for user, official, and citizen models
-
+    authRoutes(router);
     return router;
 };
