@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import connectDB from "./config/db";
 
 dotenv.config();
 const app = express();
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Connect to database and start server
-connectToDatabase().then(() => {
+connectDB().then(() => {
 	startServer(port);
 });
 
@@ -52,15 +52,5 @@ function startServer(port: number) {
 	});
 }
 
-async function connectToDatabase() {
-	mongoose.Promise = global.Promise; // Use global Promise for mongoose
-	mongoose.connect(process.env.MONGO_URI as string)
 
-    mongoose.connection.on("connected", () => {
-        console.log("Connected to MongoDB successfully");
-    });
-    mongoose.connection.on("error", (err) => {
-        console.error("Error connecting to MongoDB", err);
-    });
-}
 
