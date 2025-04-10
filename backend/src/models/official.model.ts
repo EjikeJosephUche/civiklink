@@ -13,5 +13,5 @@ const officialSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-const Official = mongoose.model<IOfficial>("Official", officialSchema);
-export default Official;
+const OfficialModel = mongoose.model<IOfficial>("Official", officialSchema);
+export default OfficialModel;

@@ -1,4 +1,4 @@
-import { paginate } from './../utils/helpers';
+import { paginate } from "./../utils/helpers";
 import IUser from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
 
@@ -31,21 +31,20 @@ export class CitizenService {
 		});
 	}
 
-	async getAllOfficials() {
+	async getAllOfficials(page: number, limit: number) {
 		// Logic to fetch all officials from the database
-		return await UserModel.find({ role: "OFFICIAL" });
+		return await paginate(UserModel, page, limit, { role: "OFFICIAL" });
 	}
 
 	async getOfficialsBySearch(searchWord: string, page: number, limit: number) {
 		// Logic to fetch officials by department from the database
-        const query = {
-            $or:[
-                { role: "OFFICIAL" },
-                { department: { $regex: searchWord, options: "i" }},
-                { name: { $regex: searchWord, options: "i" }}
-            
-            ]
-        }
+		const query = {
+			$or: [
+				{ role: "OFFICIAL" },
+				{ department: { $regex: searchWord, options: "i" } },
+				{ name: { $regex: searchWord, options: "i" } },
+			],
+		};
 		return await paginate(UserModel, page, limit, query);
 	}
 }
