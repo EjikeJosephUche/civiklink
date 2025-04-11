@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import naijaStates from 'naija-state-local-government';
 import { GovOne } from './sections/GovOne';
 import '../styles/global.css'
+
+
 
 interface Props {
   onContinue: (location: string) => void;
@@ -12,12 +14,57 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
   const [state, setState] = useState('');
   const [lga, setLga] = useState('');
   const [ward, setWard] = useState('');
+  const [lgas, setLgas] = useState<string[]>([]);
+  const [showOfficial, setShowOfficial] = useState(false);
 
   const states = naijaStates.states();
-  const lgas = state ? naijaStates.lgas(state) : [];
+
+  // Mock data for government officials
+  const official = {
+    name: 'John Doe',
+    sector: 'Minister of Health',
+    state: 'Lagos',
+    lga: 'Ikeja',
+    contact: '+234 123 456 789',
+    profilePicture: 'https://via.placeholder.com/150', // Use a real URL or API to fetch image
+  };
+
+  // Fetch LGAs based on selected state
+ useEffect(() => {
+  if (state) {
+    try {
+      const result = naijaStates.lgas(state) as unknown;
+
+      let lgaData: string[] = [];
+
+      if (Array.isArray(result)) {
+        lgaData = result;
+      } else if (
+        result &&
+        typeof result === 'object' &&
+        'lgas' in result &&
+        Array.isArray((result as { lgas: unknown }).lgas)
+      ) {
+        lgaData = (result as { lgas: string[] }).lgas;
+      }
+
+      setLgas(lgaData);
+    } catch (err) {
+      console.error('Failed to load LGAs:', err);
+      setLgas([]);
+    }
+  } else {
+    setLgas([]);
+  }
+}, [state]);
+
+
+
+
 
   const handleContinue = () => {
     const selectedLocation = `${ward ? ward + ', ' : ''}${lga}, ${state}`;
+    setShowOfficial(true); // Show official profile after continue
     onContinue(selectedLocation);
   };
 
@@ -41,9 +88,9 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
       {/* Inputs */}
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', width: '80%', margin: '41px auto', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* State */}
-        <div style={{ flexDirection: 'column', display: 'flex'}}>
-          <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%', }}>State</label>
-          <select style={{border: '1px solid #2D2D2D', padding: '14.5px 20px', width: '400px'}}  value={state} onChange={(e) => setState(e.target.value)} required>
+        <div style={{ flexDirection: 'column', display: 'flex' }}>
+          <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>State</label>
+          <select style={{ border: '1px solid #2D2D2D', padding: '14.5px 20px', width: '400px' }} value={state} onChange={(e) => setState(e.target.value)} required>
             <option value="">Select State</option>
             {states.map((s) => (
               <option key={s} value={s}>
@@ -54,9 +101,9 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
         </div>
 
         {/* LGA */}
-        <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center'}}>
-          <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%', }}>Local Government Area</label>
-          <select style={{border: '1px solid #2D2D2D', padding: '14.5px 20px', width: '400px'}} 
+        <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center' }}>
+          <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>Local Government Area</label>
+          <select style={{ border: '1px solid #2D2D2D', padding: '14.5px 20px', width: '400px' }} 
             value={lga}
             onChange={(e) => setLga(e.target.value)}
             disabled={!state}
@@ -70,11 +117,11 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
             ))}
           </select>
         </div>
-{/* Ward/Area (optional) */}
-        {/* Ward */}
+
+        {/* Ward/Area (optional) */}
         <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', marginBottom: '0px' }}>
-          <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>Ward/Area(optional)</label>
-          <input style={{ padding: '14.5px 20px', marginBottom: '0px'}}
+          <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>Ward/Area (optional)</label>
+          <input style={{ padding: '14.5px 20px', marginBottom: '0px' }}
             type="text"
             value={ward}
             onChange={(e) => setWard(e.target.value)}
@@ -85,16 +132,44 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
 
       {/* Buttons */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <button onClick={onBack}>Back</button>
-        
+        <button onClick={onBack}
+        style={{ cursor:'pointer', color: '#164B1A', padding: '0.75rem 1.5rem', border: '1px solid #164B1A',borderRadius: '8px' }}>Back</button>
+
         <button
           onClick={handleContinue}
           disabled={!state || !lga}
-          style={{ background: 'green', color: 'white', padding: '0.75rem 1.5rem', border: 'none' }}
+          style={{ cursor:'pointer', background: '#164B1A', color: 'white', padding: '0.75rem 1.5rem', border: 'none',borderRadius: '8px' }}
         >
           Continue
         </button>
       </div>
+
+      {/* Show Official Profile Section */}
+      {showOfficial && (
+        <div style={{ marginTop: '2rem', width: '80%', margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Official Information</h2>
+          <div style={{ display: 'flex', gap: '2rem', border: '1px solid #ddd', padding: '1rem', borderRadius: '8px' }}>
+            <img
+              src={official.profilePicture}
+              alt="Official"
+              style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+            />
+            <div style={{ flex: 1 }}>
+              <h3>{official.name}</h3>
+              <p><strong>Office:</strong> {official.sector}</p>
+              <p><strong>State:</strong> {official.state}</p>
+              <p><strong>LGA:</strong> {official.lga}</p>
+              <p><strong>Contact:</strong> {official.contact}</p>
+              <button
+                style={{ background: 'blue', color: 'white', padding: '0.75rem 1.5rem', border: 'none', borderRadius: '4px' }}
+                onClick={() => alert(`Calling ${official.contact}...`)}
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
