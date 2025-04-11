@@ -13,7 +13,7 @@ export const GovOne = ({ header, subheader}: GovOneProps) => {
   <div className="section-one">
    <h1 className="services-header">{header}</h1>
    <p className="services-sub">{subheader}</p>
-   <input type="text" name="" id="" placeholder="Search for services (e.g., government officials, passports, taxes, permits)..."/>
+   <input className="search-input" type="text" name="" id="" placeholder="Search for services (e.g., government officials, passports, taxes, permits)..."/>
   </div>
  );
 }

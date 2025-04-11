@@ -22,7 +22,7 @@
   color: #012103;
 }
 
-input {
+.search-input {
   min-width: 800px;
   border-radius: 10px;
   border: 1px solid;
