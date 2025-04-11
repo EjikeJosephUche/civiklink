@@ -27,25 +27,28 @@ const Footer = () => {
 
           <div className={styles.section}>
             <h3>About Us</h3>
-            <p>
-              CivicLink helps citizens engage with their government and access public services.
-            </p>
+           <ul>
+              <li><Link to="/">Missions</Link></li>
+              <li><Link to="#">Leadership</Link></li>
+              
+            </ul>
           </div>
 
           <div className={styles.section}>
             <h3>Contact Us</h3>
             <p>Email: support@civiclink.ng</p>
             <p>Phone: +234 800 123 4567</p>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.socials}>
+            <div className={styles.socials}>
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
       </div>
+          </div>
+        </div>
+      </div>
+
+      
     </footer>
   );
 };
