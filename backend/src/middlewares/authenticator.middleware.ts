@@ -32,3 +32,10 @@ export const verifyToken = (
 		next(new HttpError(403, "Forbidden"));
 	}
 };
+
+export const verifyIsOfficial = (req: AuthRequest, res: Response, next: NextFunction) => {
+	if (req.user?.role !== "OFFICIAL") {
+		return next(new HttpError(403, "Forbidden. Access denied"));
+	}
+	next();
+}
