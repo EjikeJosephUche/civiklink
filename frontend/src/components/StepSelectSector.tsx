@@ -22,7 +22,13 @@ const StepSelectSector = ({ onContinue }: Props) => {
     <>
   <GovOne header={"Find the Right Office"} subheader='Step 1 of 3: Select the issue you need help with'/>
 
-      <div className="cardsContainer">
+      <div className="cardsContainer"
+      style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)', // 4 cards per row
+    gap: '1rem', // Spacing between cards
+  }}>
+        
         {sectors.map((item) => (
           <div
             key={item.title}
@@ -45,7 +51,7 @@ const StepSelectSector = ({ onContinue }: Props) => {
     <button
       style={{
         padding: '0.75rem 1.5rem',
-        background: 'green',
+        background: '#164B1A',
         color: 'white',
         border: 'none',
         borderRadius: '4px',

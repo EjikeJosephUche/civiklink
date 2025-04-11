@@ -8,7 +8,7 @@ import tax from '../assets/img/Tax.png';
 import water from '../assets/img/Water.png';
 
 export const sectors = [
-  { title: 'Roads & Transport', image: roadsImg },
+  { title: 'Roads', image: roadsImg },
   { title: 'Education', image: education },
   { title: 'Security', image: security },
   { title: 'Agriculture', image: agric },
