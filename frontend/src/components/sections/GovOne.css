@@ -23,7 +23,7 @@
 }
 
 input {
-  max-width: 1000px;
+  min-width: 800px;
   border-radius: 10px;
   border: 1px solid;
   background-color: #f0fff1;
