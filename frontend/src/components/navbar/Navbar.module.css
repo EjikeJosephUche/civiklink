@@ -30,3 +30,13 @@ ul {
 .nav-links a:hover {
   text-decoration: underline;
 }
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 🔥 Active link styling */
+.nav-links a.active {
+  background-color: #61dafb;
+  color: #282c34;
+}

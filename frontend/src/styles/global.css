@@ -3,3 +3,33 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #f9f9f9;
 }
+.btn-dark {
+  background-color: #014406;
+  color: white;
+  padding: 10px 53px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-light {
+  background-color: white;
+  color: #014406;
+  padding: 10px 53px;
+  border: 1px solid #014406;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: #164b1a; /* Darken button color on hover */
+}
+
+.btn-light:hover {
+  background-color: #164b1a; /* Darken button color on hover */
+  color: white;
+}
