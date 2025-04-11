@@ -22,21 +22,65 @@ ul {
   gap: 1rem;
 }
 
-.nav-links a {
+.navLinks a {
   color: white;
   text-decoration: none;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
-}
-
-.nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.navLinks a:hover {
+  /* text-decoration: underline; */
+  color: #ffd700;
 }
 
 /* 🔥 Active link styling */
-.nav-links a.active {
-  background-color: #61dafb;
-  color: #282c34;
+.navinks a.active {
+  /* background-color: #61dafb; */
+  color: #ffd700;
+}
+
+.language h3 {
+  font-size: 16px;
+  /* color: #666; */
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navLinks {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    transform: translateY(-200%);
+    z-index: 10;
+  }
+
+  .navLinks.active {
+    transform: translateY(0);
+  }
+
+  .language {
+    display: none;
+  }
 }
