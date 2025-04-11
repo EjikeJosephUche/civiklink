@@ -3,6 +3,7 @@ import { AuthRequest } from "../interfaces/auth.interface";
 import { HttpError } from "../utils/httpError";
 import { CitizenService } from "../services/citizen.service";
 import OfficialService from "../services/official.service";
+import { decryptPassword, generateToken } from "../utils/helpers";
 
 const { getCitizenDetails, registerCitizen } = new CitizenService();
 const { getOfficialDetails, registerOfficial } = new OfficialService();
@@ -34,37 +35,46 @@ export default class UserController {
 					.json({ success: true, message: "User registered successfully" });
 			}
 		} catch (error) {
-            console.error("Error in registerCitizen:", error);
+			console.error("Error in registerCitizen:", error);
 			return next(new HttpError(500, "Internal Server Error"));
 		}
 	}
 
 	async registerOfficial(req: Request, res: Response, next: NextFunction) {
-		
 		try {
-            const {name, email, password, position, description, department, contactInfo } = req.body;
+			const {
+				name,
+				email,
+				password,
+				position,
+				description,
+				department,
+				contactInfo,
+			} = req.body;
 			const user = await getOfficialDetails(email);
-            if (user) {
-                return next(new HttpError(409, "Official already exists"));
-            }
+			if (user) {
+				return next(new HttpError(409, "Official already exists"));
+			}
 
-            // Logic to register a new official in the database
-            const newOfficial = await registerOfficial({
-                name,
-                email,
-                password,
-                position,
-                description,
-                department,
-                contactInfo,
-            });
+			// Logic to register a new official in the database
+			const newOfficial = await registerOfficial({
+				name,
+				email,
+				password,
+				position,
+				description,
+				department,
+				contactInfo,
+			});
 
-            if (!newOfficial) {
-                return next(new HttpError(500, "Official registration failed"));
-            }
-            res.status(201).json({ success: true, message: "Official registered successfully" });
+			if (!newOfficial) {
+				return next(new HttpError(500, "Official registration failed"));
+			}
+			res
+				.status(201)
+				.json({ success: true, message: "Official registered successfully" });
 		} catch (error) {
-            console.error("Error in registerOfficial:", error);
+			console.error("Error in registerOfficial:", error);
 			return next(new HttpError(500, "Internal Server Error"));
 		}
 	}
@@ -72,33 +82,69 @@ export default class UserController {
 	async loginUser(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { email, password, role } = req.body;
-			const userCitizen = await getCitizenDetails(email);
-			const userOfficial = await getOfficialDetails(email);
+			const userCitizen = (role == "CITIZEN" && await getCitizenDetails(email));
+			const userOfficial = (role == "OFFICIAL" && await getOfficialDetails(email));
 			if (!userCitizen && !userOfficial) {
 				return next(new HttpError(401, "Invalid credentials"));
 			}
 			if (
-				(userCitizen && userCitizen.role !== role) &&
-				(userOfficial && userOfficial.role !== role)
+				userCitizen &&
+				userCitizen.role !== role &&
+				userOfficial &&
+				userOfficial.role !== role
 			) {
 				return next(new HttpError(403, "Forbidden"));
-			}else {
-                if (userCitizen && userCitizen.role === role) {
-                    console.log("Citizen login");
-                    res.status(200).send({
-                        success: true,
-                        message: "Login successful as citizen",
-                        
-                    });
-                }
-                if (userOfficial && userOfficial.role === role) {
-                    console.log("Official login");
-                    res.status(200).send({
-                        success: true,
-                        message: "Login successful as user",
-                    });
-                }
-            }
+			} else {
+				if (userCitizen && userCitizen.role === role) {
+					console.log("Citizen login");
+					// Logic to verify password and generate token
+					const isPasswordValid = await decryptPassword(
+						password,
+						userCitizen.password
+					);
+
+					if (!isPasswordValid) {
+						return next(new HttpError(401, "Invalid credentials"));
+					}
+					// Logic to generate token
+					const userData = {
+						userId: userCitizen._id as string,
+						role: userCitizen.role,
+						email: userCitizen.email,
+					};
+					const token = generateToken(userData);
+
+					res.status(200).send({
+						success: true,
+						message: "Login successful as citizen",
+						data: { token }
+					});
+				}
+				if (userOfficial && userOfficial.role === role) {
+					console.log("Official login");
+
+                    // Logic to verify password and generate token
+					const isPasswordValid = await decryptPassword(
+						password,
+						userOfficial.password
+					);
+                    if (!isPasswordValid) {
+						return next(new HttpError(401, "Invalid credentials"));
+					}
+					// Logic to generate token
+					const userData = {
+						userId: userOfficial._id as string,
+						role: userOfficial.role,
+						email: userOfficial.email,
+					};
+					const token = generateToken(userData);
+					res.status(200).send({
+						success: true,
+						message: "Login successful as Official",
+						data: { token }
+					});
+				}
+			}
 		} catch (error) {
 			return next(new HttpError(500, "Internal Server Error"));
 		}

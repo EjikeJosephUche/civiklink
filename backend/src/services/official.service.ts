@@ -1,6 +1,6 @@
 import IOfficial from "../interfaces/official.interface";
 import OfficialModel from "../models/official.model";
-import { encryptPassword } from "../utils/helpers";
+import { encryptPassword, paginate } from "../utils/helpers";
 
 export default class OfficialService {
 	async registerOfficial(data: Partial<IOfficial>) {
@@ -17,8 +17,9 @@ export default class OfficialService {
             contactInfo,
 		});
 	}
-	async getAllOfficialsDetails() {
-		return await OfficialModel.find({ role: "OFFICIAL" });
+	async getAllOfficials(page: number, limit: number) {
+		// Logic to fetch all officials from the database
+		return await paginate(OfficialModel, page, limit, { role: "OFFICIAL" });
 	}
 
     async getOfficialDetails(email:string){
