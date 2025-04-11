@@ -22,18 +22,36 @@ export default class OfficialService {
 		return await paginate(OfficialModel, page, limit, { role: "OFFICIAL" });
 	}
 
-    async getOfficialDetails(email:string){
+    async getOfficialDetails(email:string, userId: String){
         // Logic to fetch official details from the database
-        return await OfficialModel.findOne({ email, role: "OFFICIAL" });
+        return await OfficialModel.findOne({ email, _id:userId, role: "OFFICIAL" });
     }
 
-	async getOfficialByEmail(email: String, userId: String) {
+	async getOfficialById(userId: String) {
 		return await OfficialModel.findOne({
-			email,
 			_id: userId,
 			role: "OFFICIAL",
 		});
 	}
+
+    async getOfficialByEmail(email: string) {
+        // Logic to fetch official by email from the database
+        return await OfficialModel.findOne({ email, role: "OFFICIAL" });
+    }
+    
+	async getOfficialsBySearch(searchWord: string, page: number, limit: number) {
+		// Logic to fetch officials by department from the database
+		const query = {
+			$or: [
+				{ role: "OFFICIAL" },
+				{ department: { $regex: searchWord, options: "i" } },
+				{ name: { $regex: searchWord, options: "i" } },
+				{ position: { $regex: searchWord, options: "i" } },
+			],
+		};
+		return await paginate(OfficialModel, page, limit, query);
+	}
+
 	async updateOfficialDetails(
 		email: String,
 		userId: String,

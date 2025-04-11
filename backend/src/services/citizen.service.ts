@@ -16,10 +16,14 @@ export class CitizenService {
 			password: encryptedPassword,
 		});
 	}
-
-	async getCitizenDetails(email: string) {
+    async getCitizenByEmail(email: string) {
+        // Logic to fetch citizen by email from the database
+        return await CitizenModel.findOne({ email, role: "CITIZEN" });
+    }
+    
+	async getCitizenDetails(email: string, userId: string) {
 		// Logic to fetch citizen details from the database
-		return await CitizenModel.findOne({ email, role: "CITIZEN" });
+		return await CitizenModel.findOne({ email, _id: userId, role: "CITIZEN" });
 	}
 
 	async updateCitizenDetails(
@@ -45,21 +49,4 @@ export class CitizenService {
 		});
 	}
 
-	async getAllOfficials(page: number, limit: number) {
-		// Logic to fetch all officials from the database
-		return await paginate(OfficialModel, page, limit, { role: "OFFICIAL" });
-	}
-
-	async getOfficialsBySearch(searchWord: string, page: number, limit: number) {
-		// Logic to fetch officials by department from the database
-		const query = {
-			$or: [
-				{ role: "OFFICIAL" },
-				{ department: { $regex: searchWord, options: "i" } },
-				{ name: { $regex: searchWord, options: "i" } },
-				{ position: { $regex: searchWord, options: "i" } },
-			],
-		};
-		return await paginate(OfficialModel, page, limit, query);
-	}
 }

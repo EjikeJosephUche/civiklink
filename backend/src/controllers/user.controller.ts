@@ -5,14 +5,14 @@ import { CitizenService } from "../services/citizen.service";
 import OfficialService from "../services/official.service";
 import { decryptPassword, generateToken } from "../utils/helpers";
 
-const { getCitizenDetails, registerCitizen } = new CitizenService();
-const { getOfficialDetails, registerOfficial } = new OfficialService();
+const { registerCitizen, getCitizenByEmail } = new CitizenService();
+const { registerOfficial, getOfficialByEmail } = new OfficialService();
 
 export default class UserController {
 	async registerCitizen(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { username, firstName, lastName, email, password } = req.body;
-			const user = await getCitizenDetails(email);
+			const user = await getCitizenByEmail(email);
 			if (user) {
 				return next(new HttpError(409, "User already exists"));
 			}
@@ -51,7 +51,7 @@ export default class UserController {
 				department,
 				contactInfo,
 			} = req.body;
-			const user = await getOfficialDetails(email);
+			const user = await getOfficialByEmail(email);
 			if (user) {
 				return next(new HttpError(409, "Official already exists"));
 			}
@@ -82,8 +82,8 @@ export default class UserController {
 	async loginUser(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { email, password, role } = req.body;
-			const userCitizen = (role == "CITIZEN" && await getCitizenDetails(email));
-			const userOfficial = (role == "OFFICIAL" && await getOfficialDetails(email));
+			const userCitizen = (role == "CITIZEN" && await getCitizenByEmail(email));
+			const userOfficial = (role == "OFFICIAL" && await getOfficialByEmail(email));
 			if (!userCitizen && !userOfficial) {
 				return next(new HttpError(401, "Invalid credentials"));
 			}
