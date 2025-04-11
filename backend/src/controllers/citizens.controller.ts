@@ -1,4 +1,3 @@
-import { Update } from "./../../../frontend/node_modules/vite/types/hmrPayload.d";
 import { NextFunction, Response } from "express";
 import { AuthRequest } from "../interfaces/auth.interface";
 import { CitizenService } from "../services/citizen.service";
