@@ -8,7 +8,7 @@ import { decryptPassword, generateToken } from "../utils/helpers";
 const { registerCitizen, getCitizenByEmail } = new CitizenService();
 const { registerOfficial, getOfficialByEmail } = new OfficialService();
 
-export default class UserController {
+export default class AuthController {
 	async registerCitizen(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { username, firstName, lastName, email, password } = req.body;

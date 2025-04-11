@@ -27,9 +27,9 @@ export default class OfficialService {
         return await OfficialModel.findOne({ email, _id:userId, role: "OFFICIAL" });
     }
 
-	async getOfficialById(userId: String) {
+	async getOfficialById(officialId: String) {
 		return await OfficialModel.findOne({
-			_id: userId,
+			_id: officialId,
 			role: "OFFICIAL",
 		});
 	}
