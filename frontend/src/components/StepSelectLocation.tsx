@@ -16,6 +16,7 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
   const [ward, setWard] = useState('');
   const [lgas, setLgas] = useState<string[]>([]);
   const [showOfficial, setShowOfficial] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const states = naijaStates.states();
 
@@ -67,22 +68,37 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
     setShowOfficial(true); // Show official profile after continue
     onContinue(selectedLocation);
   };
+   // Simulate loading of the map
+  useEffect(() => {
+    // Replace with actual map load event in production
+    const timer = setTimeout(() => {
+      setLoading(false); // Set loading to false after 3 seconds (simulated)
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div>
       <GovOne header="Find the Right Office" subheader="Step 2 of 3: Choose your location" />
 
-      {/* Map */}
-      <div style={{ width: '80%', height: '450px', marginBottom: '2rem', margin: '0 auto' }}>
-        <iframe
-          title="Map of Nigeria"
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          style={{ border: 0 }}
-          src="https://maps.google.com/maps?q=Nigeria&z=6&output=embed"
-          allowFullScreen
-        />
+       {/* Map with Loading state */}
+      <div style={{ width: '80%', height: '450px', marginBottom: '2rem', margin: '0 auto', position: 'relative' }}>
+        {loading ? (
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <span style={{color: 'green', fontSize: '28px', fontWeight: '500'}}>Loading map...</span> {/* Replace with a spinner or more advanced loading state */}
+          </div>
+        ) : (
+          <iframe
+            title="Map of Nigeria"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            style={{ border: 0 }}
+            src="https://maps.google.com/maps?q=Nigeria&z=6&output=embed"
+            allowFullScreen
+          />
+        )}
       </div>
 
       {/* Inputs */}

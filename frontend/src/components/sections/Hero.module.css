@@ -1,30 +1,62 @@
-.hero-content {
+.heroContent {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0;
-  padding: 40px 30px;
+  background-image: url("../../assets/img/hero-img.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white; /* Text color on the image */
+  padding: 99px 0px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px; /* Limit the max width of the hero section */
+  width: 100vw;
+  overflow: hidden;
+  margin: -2rem;
+  border: none;
+  max-height: 50vh;
   text-align: center;
   gap: 20px; /* Space between child elements */
+  z-index: 1; /* Ensure the content appears above the overlay */
+  position: relative; /* Necessary for positioning the overlay */
+  max-width: 100vw; /* Avoids any horizontal overflow */
+  overflow-x: hidden; /* Prevents image overflow */
 }
 
-.hero-header {
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #014406b2; /* Greenish color with opacity */
+  z-index: 1;
+}
+
+.heroContent {
+  z-index: 2;
+  text-align: center;
+}
+
+/* .heroContent h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+} */
+
+.heroHeader {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #2c3e50; /* Dark color for the header */
-  margin-bottom: 20px;
+  color: white; /* Text color on the image */
+  z-index: 2;
+  /* margin-bottom: 20px; */
 }
 
-.hero-content p {
+.heroContent p {
   font-size: 1.2rem;
-  color: #7f8c8d; /* A lighter color for the description text */
+  color: white; /* A lighter color for the description text */
   margin-bottom: 30px;
   max-width: 600px;
+  z-index: 2;
 }
 
 input[type="text"] {
@@ -32,14 +64,16 @@ input[type="text"] {
   max-width: 400px;
   padding: 12px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
   border-radius: 5px;
   font-size: 1rem;
+  z-index: 2;
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #3498db; /* Change border color on focus */
+  border-color: #000000; /* Change border color on focus */
+  z-index: 2;
 }
 
 .btn {
@@ -51,6 +85,7 @@ input[type="text"]:focus {
   cursor: pointer;
   font-size: 1.1rem;
   transition: background-color 0.3s ease;
+  z-index: 2;
 }
 
 .btn:hover {
