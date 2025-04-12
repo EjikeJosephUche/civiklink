@@ -57,10 +57,12 @@ const Navbar = () => {
       </ul>
 
       <div className={styles.icons}>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaSearch /></a>
+      {/* <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link> */}
+
+        <Link to="/login" target="_blank" rel="noopener noreferrer"><FaSearch /></Link>
         <h3 style={{fontSize: '20px'}}>English</h3>
 
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaUser /></a>
+        <Link to="/login" rel="noopener noreferrer"><FaUser /></Link>
 
       </div>
        {menuOpen && (
