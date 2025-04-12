@@ -2,7 +2,6 @@ import { GovBtnSection } from "../components/sections/GovBtnSection";
 import { GovOne } from "../components/sections/GovOne";
 import Tabs from "../components/Tabs";
 import '../styles/tabs.css'
-// import { FaBuildingFlag } from "react-icons/fa6";
 
 const Government = () => {
    const fedral = ['Federal Ministry of Works', 'Federal Housing Authority', 'Federal Ministry of Water Resourses'];
