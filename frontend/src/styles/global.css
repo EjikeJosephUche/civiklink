@@ -33,3 +33,12 @@ body {
   background-color: #164b1a; /* Darken button color on hover */
   color: white;
 }
+@media (max-width: 768px) {
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 19px;
+  }
+}

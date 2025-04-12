@@ -31,3 +31,18 @@
   font-weight: 700;
   height: 140%;
 }
+
+@media (max-width: 1200px) {
+  .cardsContainer {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 cards per row for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsContainer {
+    grid-template-columns: 1fr; /* 1 card per row for small screens */
+  }
+}

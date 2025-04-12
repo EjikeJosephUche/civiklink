@@ -102,7 +102,7 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
       </div>
 
       {/* Inputs */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', width: '80%', margin: '41px auto', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className='input-container' style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', width: '80%', margin: '41px auto', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* State */}
         <div style={{ flexDirection: 'column', display: 'flex' }}>
           <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>State</label>
@@ -137,7 +137,7 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
         {/* Ward/Area (optional) */}
         <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', marginBottom: '0px' }}>
           <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>Ward/Area (optional)</label>
-          <input style={{ padding: '14.5px 20px', marginBottom: '0px' }}
+          <input className='ward' style={{ border: '1px solid #2D2D2D', padding: '14.5px 20px', marginBottom: '0px' }}
             type="text"
             value={ward}
             onChange={(e) => setWard(e.target.value)}
