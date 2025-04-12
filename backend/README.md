@@ -32,6 +32,8 @@ Built with Node.js, Express, MongoDB, and WebSocket for real-time communication.
 
 ## API Endpoints
 
+- **Prefix Url**: `/v1/api`
+
 ### Authentication
 
 | Endpoint               | Method | Description                        | Required Fields                                                      |
@@ -48,10 +50,12 @@ Built with Node.js, Express, MongoDB, and WebSocket for real-time communication.
 | `/citizen/profile`          | PUT    | Update citizen profile | Bearer Token   |
 | `/citizen/profile`          | DELETE | Delete citizen account | Bearer Token   |
 | `/citizen/officials`        | GET    | List all officials     | Bearer Token   |
-| `/citizen/officials/search` | GET    | Search officials       | Bearer Token   |
+| `/citizen/officials/search` | GET    | Search officials using query parameter `searchWord`       | Bearer Token   |
 | `/citizen/officials/:id`    | GET    | Get official details   | Bearer Token   |
 
 ### Official
+
+- **Prefix Url**: `api/user`
 
 | Endpoint            | Method | Description             | Authentication |
 | ------------------- | ------ | ----------------------- | -------------- |
@@ -103,11 +107,14 @@ socket.send(
 
 1. User logs in via `/auth/login` to receive JWT token
 2. Token must be included in subsequent requests:
-   ```
+
+   ```http
    Authorization: Bearer <token>
    ```
+
 3. For WebSocket connections, include token in query params:
-   ```
+
+   ```Typescript
    ws://yourdomain.com/ws?token=<token>
    ```
 
@@ -149,6 +156,7 @@ Common error codes:
 3. Set up environment variables (see next section)
 
 4. Start the server:
+
    ```bash
    npm start
    ```
@@ -157,12 +165,12 @@ Common error codes:
 
 Create a `.env` file in the root directory:
 
-```
+```env
 DB_URI=your_DB_uri
 JWT_SECRET=your_jwt_secret
 PORT=your_port
 NODE_ENV="production" or "development"
-CLIENT_URL=your_client_Deployed_link_for_cors
+CLIENT_URL=your_client_Deployed_link_for_cors_origin_management
 ```
 
 ## Testing
@@ -188,6 +196,19 @@ npm run test:integration
    ```
 
 2. Using PM2 for process management:
+
    ```bash
    pm2 start dist/server.js --name civiklink
+   ```
+
+3. Development command to Start server
+
+   ```bash
+   npm run dev
+   ```
+
+4. Production command to Start server
+
+   ```bash
+   npm run start
    ```
