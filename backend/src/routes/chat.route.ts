@@ -2,25 +2,24 @@ import { Router } from "express";
 import ChatController from "../controllers/chat.controller";
 import { verifyToken } from "../middlewares/authenticator.middleware";
 
-const { 
-  createChat, 
-  sendMessage, 
-  getChat, 
-  getMyChats, 
-  updateChatStatus 
-} = new ChatController();
+const { createChat, sendMessage, getChat, getMyChats, updateChatStatus } =
+  new ChatController();
 
-export default function (prefixUrl: string, router: Router) {
-	// chat routes
-	router.post(prefixUrl, verifyToken, createChat);
+export default function () {
+  // chat routes
+  const router = Router();
+  
 
-	router.post(`${prefixUrl}/:chatId/messages`, verifyToken, sendMessage);
+  // Chat routes
+  router.post("/", verifyToken, createChat);
 
-	router.get(`${prefixUrl}/:chatId`, verifyToken, getChat);
+  router.post(`/:chatId/messages`, verifyToken, sendMessage);
 
-	router.get(prefixUrl, verifyToken, getMyChats);
+  router.get(`/:chatId`, verifyToken, getChat);
 
-	router.patch(`${prefixUrl}/:chatId/status`, verifyToken, updateChatStatus);
+  router.get("/", verifyToken, getMyChats);
 
-	return router;
+  router.patch(`/:chatId/status`, verifyToken, updateChatStatus);
+
+  return router;
 }
