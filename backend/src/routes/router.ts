@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authRouter from "./auth.route";
-import citizenRouter from "./user.routes";
+import citizenRouter from "./citizen.routes";
 import officialRouter from "./official.route";
 import chatRouter from "./chat.route";
 

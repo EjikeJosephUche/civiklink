@@ -35,7 +35,7 @@ export class CitizenService {
 		// Logic to update citizen details in the database
 		return await CitizenModel.findOneAndUpdate(
 			{ email, _id: userId, role },
-			data,
+			{ $set: data }, // Use $set to update only the specified fields
 			{ new: true, runValidators: true } // Return the updated document and run validators
 		);
 	}
