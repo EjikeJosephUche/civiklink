@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyToken } from "../middlewares/authenticator.middleware";
+import { verifyIsRole, verifyToken } from "../middlewares/authenticator.middleware";
 import CitizensController from "../controllers/citizens.controller";
 import OfficialsController from "../controllers/officials.controller";
 
@@ -13,14 +13,14 @@ export default function () {
   const router = Router();
 
   // Citizen profile routes
-  router.get("/profile", verifyToken, getCitizenProfile);
-  router.put("/profile", verifyToken, UpdateCitizenProfile);
-  router.delete("/profile", verifyToken, deleteCitizenProfile);
+  router.get("/profile", verifyToken, verifyIsRole("CITIZEN"), getCitizenProfile);
+  router.put("/profile", verifyToken, verifyIsRole("CITIZEN"), UpdateCitizenProfile);
+  router.delete("/profile", verifyToken, verifyIsRole("CITIZEN"), deleteCitizenProfile);
 
   // Citizen access to officials
-  router.get("/officials", verifyToken, getOffcials);
-  router.get("/officials/search", verifyToken, getOfficialsBySearchKeyword);
-  router.get("/officials/:id", verifyToken, getOfficialDetailsById);
+  router.get("/officials", verifyToken, verifyIsRole("CITIZEN"), getOffcials);
+  router.get("/officials/search", verifyToken, verifyIsRole("CITIZEN"), getOfficialsBySearchKeyword);
+  router.get("/officials/:id", verifyToken, verifyIsRole("CITIZEN"), getOfficialDetailsById);
 
   return router;
 }
