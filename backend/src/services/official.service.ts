@@ -39,15 +39,14 @@ export default class OfficialService {
         return await OfficialModel.findOne({ email, role: "OFFICIAL" });
     }
     
-	async getOfficialsBySearch(searchWord: string = "", page: number, limit: number) {
+	async getOfficialsBySearch(searchWord: string, page: number, limit: number) {
 		// Logic to fetch officials by department from the database
 		const query = {
 			$or: [
-				{ role: "OFFICIAL" },
-				{ department: { $regex: searchWord, options: "i" } },
-				{ name: { $regex: searchWord, options: "i" } },
-				{ position: { $regex: searchWord, options: "i" } },
-			],
+				{ department: { $regex: searchWord, $options: "i" } },
+				{ name: { $regex: searchWord, $options: "i" } },
+				{ position: { $regex: searchWord, $options: "i" } },
+			]
 		};
 		return await paginate(OfficialModel, page, limit, query);
 	}

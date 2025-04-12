@@ -11,19 +11,20 @@ const { getCitizenProfile, UpdateCitizenProfile, deleteCitizenProfile } =
 
 const { getOffcials, getOfficialsBySearchKeyword, getOfficialDetailsById } =
   new OfficialsController();
-
+const router = Router();
 export default function () {
-  const router = Router();
-
+  
+  // Citizen access to officials
+  router.get("/officials", verifyToken, verifyIsRole("CITIZEN"), getOffcials);
+  router.get("/officials/search", verifyToken, verifyIsRole("CITIZEN"),  getOfficialsBySearchKeyword);
+  router.get("/officials/:id", verifyToken, verifyIsRole("CITIZEN"), requestQueryValidator(QuerySchema), getOfficialDetailsById);
+  
   // Citizen profile routes
   router.get("/profile", verifyToken, verifyIsRole("CITIZEN"), getCitizenProfile);
   router.put("/profile", verifyToken, verifyIsRole("CITIZEN"), RequestValidator(UpdateCitizenSchema), UpdateCitizenProfile);
   router.delete("/profile", verifyToken, verifyIsRole("CITIZEN"), deleteCitizenProfile);
 
-  // Citizen access to officials
-  router.get("/officials", verifyToken, verifyIsRole("CITIZEN"), getOffcials);
-  router.get("/officials/search", verifyToken, verifyIsRole("CITIZEN"), requestQueryValidator(QuerySchema), getOfficialsBySearchKeyword);
-  router.get("/officials/:id", verifyToken, verifyIsRole("CITIZEN"), getOfficialDetailsById);
+
 
   return router;
 }

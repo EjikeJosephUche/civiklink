@@ -3,7 +3,6 @@ import logger from "../utils/logger";
 
 export const reqLogger = (req: Request, res: Response, next: NextFunction) => {
   const reqStartTime = Date.now();
-
   res.on("finish", () => {
     const reqDuration = Date.now() - reqStartTime;
     const logLevel =

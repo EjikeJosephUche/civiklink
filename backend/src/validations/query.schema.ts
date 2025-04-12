@@ -25,7 +25,7 @@ export const QuerySchema = z.object({
 		.refine((value) => Number.isInteger(value) && value > 0, {
 			message: "limit must be a positive number or a non fractional number",
 		}).default("10"),
-	searchWord: z.string().optional().transform((val) => val?.trim() ?? "").default(""),
+	word: z.string().optional().default(""),
 }).strict({
 	message: "Invalid query parameters detected",
 });
