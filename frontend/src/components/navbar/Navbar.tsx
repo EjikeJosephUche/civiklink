@@ -59,10 +59,10 @@ const Navbar = () => {
       <div className={styles.icons}>
       {/* <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link> */}
 
-        <Link to="/login" target="_blank" rel="noopener noreferrer"><FaSearch /></Link>
+        <Link className='search-icon' to="/login" target="_blank" rel="noopener noreferrer"><FaSearch /></Link>
         <h3 style={{fontSize: '20px'}}>English</h3>
 
-        <Link to="/login" rel="noopener noreferrer"><FaUser /></Link>
+        <Link className='user-icon' to="/login" rel="noopener noreferrer"><FaUser /></Link>
 
       </div>
        {menuOpen && (
