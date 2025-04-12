@@ -146,6 +146,7 @@ export default class AuthController {
         }
       }
     } catch (error) {
+      console.log(error);
       return next(new HttpError(500, "Internal Server Error"));
     }
   }

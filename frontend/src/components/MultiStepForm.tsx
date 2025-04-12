@@ -31,7 +31,7 @@ const MultiStepForm = () => {
         />
       )}
       {step === 3 && (
-        <StepShowOfficial sector={sector!} location={location!} onBack={handlePrev} />
+        <StepShowOfficial />
       )}
     </div>
   );
