@@ -1,38 +1,26 @@
-import { verifyToken } from './../middlewares/authenticator.middleware';
 import { Router } from "express";
-import AuthController from "../controllers/auth.controller";
-import OfficialsController from "../controllers/officials.controller";
+import { verifyToken } from "../middlewares/authenticator.middleware";
 import CitizensController from "../controllers/citizens.controller";
+import OfficialsController from "../controllers/officials.controller";
 
-const { registerCitizen, registerOfficial, loginUser } = new AuthController();
-const {
-	getOfficialProfile,
-	updateOfficialProfile,
-	deleteOfficialProfile,
-	getOffcials,
-	getOfficialsBySearchKeyword,
-    getOfficialDetailsById,
-} = new OfficialsController();
 const { getCitizenProfile, UpdateCitizenProfile, deleteCitizenProfile } =
-	new CitizensController();
+  new CitizensController();
 
-export default function (router: Router) {
-	//Auth routes
-	router.post("/api/auth/register", registerCitizen);
-	router.post("/api/auth/admin/register", registerOfficial);
-	router.post("/api/auth/login", loginUser);
+const { getOffcials, getOfficialsBySearchKeyword, getOfficialDetailsById } =
+  new OfficialsController();
 
-	// Citizen routes
-	router.get("/api/user/profile",verifyToken, getCitizenProfile);
-	router.put("/api/user/profile",verifyToken, UpdateCitizenProfile);
-	router.delete("/api/user/profile",verifyToken, deleteCitizenProfile);
-	router.get("/api/user/officials",verifyToken, getOffcials);
-	router.get("/api/user/officials/",verifyToken, getOfficialsBySearchKeyword);
-    router.get("/api/user/officials/:id",verifyToken, getOfficialDetailsById);
+export default function () {
+  const router = Router();
 
+  // Citizen profile routes
+  router.get("/profile", verifyToken, getCitizenProfile);
+  router.put("/profile", verifyToken, UpdateCitizenProfile);
+  router.delete("/profile", verifyToken, deleteCitizenProfile);
 
-	// Official routes
-	router.get("/api/oficial/profile",verifyToken, getOfficialProfile);
-	router.put("/api/official/profile",verifyToken, updateOfficialProfile);
-	router.delete("/api/oficial/profile",verifyToken, deleteOfficialProfile);
+  // Citizen access to officials
+  router.get("/officials", verifyToken, getOffcials);
+  router.get("/officials/search", verifyToken, getOfficialsBySearchKeyword);
+  router.get("/officials/:id", verifyToken, getOfficialDetailsById);
+
+  return router;
 }

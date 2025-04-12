@@ -1,14 +1,3 @@
-// import { Router } from "express";
-// import authRoutes from "./user.routes"
-
-// const router = Router();
-
-// export default ():Router => {
-
-//     authRoutes(router);
-//     return router;
-// };
-
 import express from "express";
 import authRouter from "./auth.route";
 import citizenRouter from "./user.routes";
