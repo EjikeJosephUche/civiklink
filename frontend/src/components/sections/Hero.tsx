@@ -14,12 +14,13 @@ export const Hero = () => {
       >
         <h1 className={styles.heroTitle}>Welcome to CivicLink Portal</h1>
         <p className={styles.heroSubtitle}>
+         
           Access services, find information, and connect with government.
         </p>
         <div className={styles.searchBar}>
           <input
             type="text"
-            placeholder="Search for services (e.g., government officials, passports, taxes, permits)..."
+            placeholder=" Search for services (e.g., government officials, passports, taxes, permits)..."
             className={styles.searchInput}
           />
           <button className={styles.searchBotton}>Search</button>

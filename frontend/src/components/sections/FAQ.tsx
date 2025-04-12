@@ -3,7 +3,7 @@ import styles from "../../styles/homePage.module.css";
 
 const FAQ: React.FC = () => {
   return (
-    <section className={styles.faqSection}>
+    <section  className={styles.faqSection}>
       <h2 className={styles.faqSectionTitle}>Frequently Asked Questions</h2>
       <div className={styles.faqList}>
         {[

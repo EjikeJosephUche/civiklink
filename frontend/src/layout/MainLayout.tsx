@@ -6,7 +6,7 @@ import '../components/navbar/Navbar.module.css';
 const MainLayout = () => (
   <>
     <Navbar />
-    <main style={{ padding: '2rem', minHeight: '80vh' }}>
+    <main style={{ padding: '2rem 0rem', minHeight: '80vh' }}>
       <Outlet />
     
     </main>
