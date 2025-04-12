@@ -31,3 +31,17 @@
   text-align: center;
   padding: 15px 118px;
 }
+
+@media (max-width: 768px) {
+  .services-header {
+    font-size: 16px;
+  }
+
+  .services-sub {
+    font-size: 12px;
+  }
+
+  .search-input {
+    width: 369px;
+  }
+}
