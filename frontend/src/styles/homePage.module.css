@@ -1,0 +1,339 @@
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.homePage {
+  background-color: #f9fafb;
+}
+/* Hero Section */
+.heroSection {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  padding-top: 5rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.searchBar {
+  display: inline-flex;
+  margin-top: 1rem;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  padding-bottom: 5rem;
+  width: 70%;
+  border: none;
+}
+
+.searchInput {
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  flex-grow: 5;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: white;
+  color: #3b3b3b;
+}
+
+.searchBotton {
+  background-color: #164b1a;
+  color: white;
+  padding: 1rem 2rem;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.searchBotton:hover {
+  background-color: #45a049;
+}
+/* Office Selector Section */
+.officeSelector {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #f0f5f5;
+  margin: 0%;
+}
+
+.sectionTitle {
+  font-size: 33px;
+  color: #004d00;
+  margin-bottom: 0.5rem;
+}
+
+.sectionDescription {
+  font-size: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.selectorForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.dropDown {
+  padding: 0.75rem;
+  width: 60%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submitButton {
+  background-color: #006400;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #004d00;
+}
+
+/* Offers Section */
+.offersSection {
+  padding: 2rem 5rem;
+  align-items: center;
+}
+
+.offerHeader {
+  text-align: center;
+  font-size: 33px;
+  font-weight: bold;
+}
+
+.offerHeaderSubText {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  padding-bottom: 40px;
+}
+.offersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.offerCard {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+.offerCard:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.cardWhite {
+  background-color: white;
+}
+
+.cardYellow {
+  background-color: #fff3b0;
+}
+
+.cardBlue {
+  background-color: #e6f7ff;
+}
+
+.offerTitle {
+  font-size: 23px;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+.offerSubtitle {
+  font-size: 13px;
+  font-weight: bold;
+  color: #1b5e20;
+  margin: 0.5rem 0;
+}
+
+.offerDescription {
+  font-size: 13px;
+  margin: 1rem 0;
+}
+
+.exploreButton {
+  background-color: #004d00;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.explore-button:hover {
+  background-color: #006400;
+}
+
+/* News Section */
+.newsSection {
+  padding: 2rem 5rem;
+  background-color: #ffffff;
+}
+
+.newsHeader {
+  text-align: center;
+  font-size: 33px;
+  font-weight: bold;
+}
+
+.newsContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 120px;
+  align-items: center;
+}
+
+.newsText {
+  flex: 1;
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.newsTitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.newsDescription {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.viewNewsButton {
+  background-color: #004d00;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.viewNewsButton:hover {
+  background-color: #006400;
+}
+
+.newsImage {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+/* FAQ Section */
+.faqSection {
+  padding: 4rem 5rem;
+  background-color: #f0f5f5;
+  align-items: center;
+}
+
+.faqSectionTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.faqList {
+  margin-top: 3rem;
+}
+
+.faqItem {
+  margin: 1rem 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.faqQuestion {
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.dropdownIcon {
+  margin-left: 10px;
+  transition: transform 0.2s;
+}
+
+details[open] .dropdownIcon {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  margin-top: 0.5rem;
+  color: #555;
+  padding: 0 1rem;
+}
+
+/* Footer */
+.site-footer {
+  background-color: #004d00;
+  color: white;
+  padding: 2rem 1rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.footer-heading {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin: 0.5rem 0;
+}
+
+.footer-icons a {
+  margin-right: 0.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.footer-icons a:hover {
+  color: #ccc;
+}

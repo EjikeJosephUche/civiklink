@@ -100,12 +100,13 @@
 /* Responsive */
 @media (max-width: 768px) {
   .footerContainer {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 3rem;
   }
 
   .infoGrid {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     gap: 2rem;
   }
 
