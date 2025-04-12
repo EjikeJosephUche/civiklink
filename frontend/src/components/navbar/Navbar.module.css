@@ -4,6 +4,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed; /* Fixes the navbar to the top of the page */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure the navbar spans the full width */
+  color: white; /* Text color */
+  padding: 1rem 2rem;
+  z-index: 1000; /* Ensures the navbar is above other content */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow effect */
 }
 
 .logo h1 {
@@ -35,8 +43,15 @@
 .navLinks li a {
   color: white;
   text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
 }
-
+.icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
 .navLinks li.activeLink a {
   color: #ffd700; /* Highlight color for active link */
   font-weight: bold;
@@ -46,25 +61,88 @@
   color: white;
 }
 
+.active {
+  display: flex;
+  right: 0;
+}
+
 @media (max-width: 768px) {
   .navLinks {
+    position: fixed;
+    top: 0;
+    right: -100%; /* hidden initially */
+    height: 100vh;
+    width: 50vw; /* half of the screen */
+    background-color: #014406;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+    /* justify-content: center; */
+    transition: right 0.3s ease-in-out;
+    z-index: 999; /* ensure it’s above other elements */
+  }
+  .navLinks.active {
+    display: flex;
+    right: 0;
+  }
+  .logo {
+    font-size: 19px;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50vw; /* Left half of the screen */
+    height: 100vh;
+    background-color: #014406b2; /* Greenish color with opacity */
+    backdrop-filter: blur(3px); /* optional: blur effect */
+    z-index: 998; /* must be less than navLinks (assumed to be 999+) */
+  }
+
+  /* .navLinks {
     display: none;
     flex-direction: column;
     width: 100%;
     align-items: center;
-  }
-
-  .navLinks.active {
-    display: flex;
-  }
+  } */
 
   .navLinks li {
-    padding: 15px;
+    padding: 20px;
     width: 100%;
     text-align: center;
   }
+  /* .navLinks li {
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+  } */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+  }
 
   .hamburger {
-    display: block;
+    display: flex;
+  }
+  .icons {
+    display: none;
+  }
+
+  .searchInput {
+    width: 116px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: white;
+    color: #014406;
+    padding: 5px 5px;
+    width: 100%;
   }
 }

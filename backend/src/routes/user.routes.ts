@@ -13,26 +13,20 @@ const {
 	getOfficialsBySearchKeyword,
     getOfficialDetailsById,
 } = new OfficialsController();
-const { getCitizenProfile, UpdateCitizenProfile, deleteCitizenProfile } =
-	new CitizensController();
+const { 
+    getCitizenProfile, 
+    UpdateCitizenProfile, 
+    deleteCitizenProfile 
+} = new CitizensController();
 
-export default function (router: Router) {
-	//Auth routes
-	router.post("/api/auth/register", registerCitizen);
-	router.post("/api/auth/admin/register", registerOfficial);
-	router.post("/api/auth/login", loginUser);
+export default function (prefixUrl:string, router: Router) {
 
 	// Citizen routes
-	router.get("/api/user/profile",verifyToken, getCitizenProfile);
-	router.put("/api/user/profile",verifyToken, UpdateCitizenProfile);
-	router.delete("/api/user/profile",verifyToken, deleteCitizenProfile);
-	router.get("/api/user/officials",verifyToken, getOffcials);
-	router.get("/api/user/officials/",verifyToken, getOfficialsBySearchKeyword);
-    router.get("/api/user/officials/:id",verifyToken, getOfficialDetailsById);
+	router.get(`${prefixUrl}/profile`,verifyToken, getCitizenProfile);
+	router.put(`${prefixUrl}/profile`,verifyToken, UpdateCitizenProfile);
+	router.delete(`${prefixUrl}/profile`,verifyToken, deleteCitizenProfile);
+	router.get(`${prefixUrl}/officials`,verifyToken, getOffcials);
+	router.get(`${prefixUrl}/officials`,verifyToken, getOfficialsBySearchKeyword);
+    router.get(`${prefixUrl}/officials/:id`,verifyToken, getOfficialDetailsById);
 
-
-	// Official routes
-	router.get("/api/oficial/profile",verifyToken, getOfficialProfile);
-	router.put("/api/official/profile",verifyToken, updateOfficialProfile);
-	router.delete("/api/oficial/profile",verifyToken, deleteOfficialProfile);
 }

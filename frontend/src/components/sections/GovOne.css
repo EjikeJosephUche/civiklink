@@ -29,4 +29,20 @@
   background-color: #f0fff1;
   color: #3b3b3b;
   text-align: center;
+  padding: 15px 118px;
+}
+
+@media (max-width: 768px) {
+  .services-header {
+    font-size: 16px;
+  }
+
+  .services-sub {
+    font-size: 12px;
+  }
+
+  .search-input {
+    padding: 18px 15px;
+    min-width: 100px;
+  }
 }

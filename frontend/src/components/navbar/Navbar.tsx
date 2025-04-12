@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import {  FaSearch, FaUser } from 'react-icons/fa';
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <h1>CivicLink</h1>
+        <h1 style={{fontWeight: '700', fontSize: '28px'}}>CivicLink</h1>
       </div>
 
       {/* Hamburger menu icon */}
@@ -21,6 +23,19 @@ const Navbar = () => {
 
       {/* Navigation links, toggle active class based on menuOpen */}
       <ul className={`${styles.navLinks} ${menuOpen ? styles.active : ''}`}>
+        {menuOpen && (
+    <>
+      <li style={{display: 'flex'}}>
+        <input
+          type="text"
+          placeholder="Search..."
+          className={styles.searchInput}
+        />
+      </li>
+      
+      
+    </>
+  )}
         <li className={`${location.pathname === '/' ? styles.activeLink : ''}`}>
           <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
         </li>
@@ -33,14 +48,31 @@ const Navbar = () => {
         <li className={`${location.pathname === '/news' ? styles.activeLink : ''}`}>
           <Link to="/news" onClick={() => setMenuOpen(false)}>News</Link>
         </li>
+
+        {menuOpen && (
+    <li className={`${location.pathname === '/login' ? styles.activeLink : ''}`}>
+      <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
+    </li>
+  )}
       </ul>
 
-      <div className={styles.language}>
-        <h3>English</h3>
+      <div className={styles.icons}>
+      {/* <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link> */}
+
+        <Link to="/login" target="_blank" rel="noopener noreferrer"><FaSearch /></Link>
+        <h3 style={{fontSize: '20px'}}>English</h3>
+
+        <Link to="/login" rel="noopener noreferrer"><FaUser /></Link>
+
       </div>
+       {menuOpen && (
+        <div className={styles.overlay} onClick={() => setMenuOpen(false)}></div>
+      )}
     </nav>
+    
+    
   );
-};
+}
 
 export default Navbar;
 
@@ -80,29 +112,3 @@ export default Navbar;
 
 // export default Navbar;
 
-// import { Link } from 'react-router-dom';
-// import styles from './Navbar.module.css';
-
-// const Navbar = () => (
-//   <>
-//  <nav className={styles.navbar}>
-//   <div>
-//     <h1 className={styles.logo}>CivicLink</h1>
-//   </div>
-//     <div>
-//  <ul className={styles.navLinks}>
-//       <li><Link to="/">Home</Link></li>
-//       <li><Link to="/government">Government</Link></li>
-//       <li><Link to="/services">Services</Link></li>
-//       <li><Link to="/news">News</Link></li>
-//     </ul>
-//     </div>
-    
-//    <div>
-//     <h3>English</h3>
-//     </div>
-//   </nav>
-//    </>
-// );
-
-// export default Navbar;

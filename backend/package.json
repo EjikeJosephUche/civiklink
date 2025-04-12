@@ -19,6 +19,7 @@
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/mongoose": "^5.11.96",
+    "@types/ws": "^8.18.1",
     "backend": "file:",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -29,6 +30,7 @@
     "nodemon": "^3.1.9",
     "rimraf": "^6.0.1",
     "winston": "^3.17.0",
+    "ws": "^8.18.1",
     "zod": "^3.24.2"
   }
 }

@@ -16,6 +16,7 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
   const [ward, setWard] = useState('');
   const [lgas, setLgas] = useState<string[]>([]);
   const [showOfficial, setShowOfficial] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const states = naijaStates.states();
 
@@ -67,26 +68,41 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
     setShowOfficial(true); // Show official profile after continue
     onContinue(selectedLocation);
   };
+   // Simulate loading of the map
+  useEffect(() => {
+    // Replace with actual map load event in production
+    const timer = setTimeout(() => {
+      setLoading(false); // Set loading to false after 3 seconds (simulated)
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div>
       <GovOne header="Find the Right Office" subheader="Step 2 of 3: Choose your location" />
 
-      {/* Map */}
-      <div style={{ width: '80%', height: '450px', marginBottom: '2rem', margin: '0 auto' }}>
-        <iframe
-          title="Map of Nigeria"
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          style={{ border: 0 }}
-          src="https://maps.google.com/maps?q=Nigeria&z=6&output=embed"
-          allowFullScreen
-        />
+       {/* Map with Loading state */}
+      <div style={{ width: '80%', height: '450px', marginBottom: '2rem', margin: '0 auto', position: 'relative' }}>
+        {loading ? (
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <span style={{color: 'green', fontSize: '28px', fontWeight: '500'}}>Loading map...</span> {/* Replace with a spinner or more advanced loading state */}
+          </div>
+        ) : (
+          <iframe
+            title="Map of Nigeria"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            style={{ border: 0 }}
+            src="https://maps.google.com/maps?q=Nigeria&z=6&output=embed"
+            allowFullScreen
+          />
+        )}
       </div>
 
       {/* Inputs */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', width: '80%', margin: '41px auto', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className='input-container' style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', width: '80%', margin: '41px auto', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* State */}
         <div style={{ flexDirection: 'column', display: 'flex' }}>
           <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>State</label>
@@ -121,7 +137,7 @@ const StepSelectLocation = ({ onContinue, onBack }: Props) => {
         {/* Ward/Area (optional) */}
         <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', marginBottom: '0px' }}>
           <label style={{ fontSize: '19px', fontWeight: '700', lineHeight: '140%' }}>Ward/Area (optional)</label>
-          <input style={{ padding: '14.5px 20px', marginBottom: '0px' }}
+          <input className='ward' style={{ border: '1px solid #2D2D2D', padding: '14.5px 20px', marginBottom: '0px' }}
             type="text"
             value={ward}
             onChange={(e) => setWard(e.target.value)}
