@@ -99,7 +99,6 @@
     align-items: center;
     padding-top: 70px;
     /* justify-content: center; */
-    transition: right 0.3s ease-in-out;
     z-index: 999; /* ensure it’s above other elements */
   }
   .navLinks.active {
@@ -117,6 +116,7 @@
     height: 100vh;
     background-color: #014406b2; /* Greenish color with opacity */
     backdrop-filter: blur(3px); /* optional: blur effect */
+    transition: all 0.2s ease-in-out;
     z-index: 998; /* must be less than navLinks (assumed to be 999+) */
   }
 
