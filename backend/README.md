@@ -1,20 +1,22 @@
-# Government Citizen Engagement Platform - API Documentation
+# Government Citizen Engagement Platform (Civiklink) - API Documentation
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [API Endpoints](#api-endpoints)
-   - [Authentication](#authentication)
-   - [Citizen](#citizen)
-   - [Official](#official)
-   - [Chat](#chat)
-3. [WebSocket Integration](#websocket-integration)
-4. [Authentication](#authentication-flow)
-5. [Error Handling](#error-handling)
-6. [Setup & Installation](#setup--installation)
-7. [Environment Variables](#environment-variables)
-8. [Testing](#testing)
-9. [Deployment](#deployment)
+- [Government Citizen Engagement Platform (Civiklink) - API Documentation](#government-citizen-engagement-platform-civiklink---api-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [API Endpoints](#api-endpoints)
+    - [Authentication](#authentication)
+    - [Citizen](#citizen)
+    - [Official](#official)
+    - [Chat](#chat)
+  - [WebSocket Integration](#websocket-integration)
+  - [Authentication Flow](#authentication-flow)
+  - [Error Handling](#error-handling)
+  - [Setup \& Installation](#setup--installation)
+  - [Environment Variables](#environment-variables)
+  - [Testing](#testing)
+  - [Deployment](#deployment)
 
 ## Overview
 
@@ -134,8 +136,8 @@ Common error codes:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourrepo/gov-chat-platform.git
-   cd gov-chat-platform
+   git clone https://github.com/EjikeJosephUche/civiklink.git
+   cd backend
    ```
 
 2. Install dependencies:
@@ -156,11 +158,11 @@ Common error codes:
 Create a `.env` file in the root directory:
 
 ```
-DB_URI=
-JWT_SECRET=
-PORT=
-NODE_ENV=
-CLIENT_URL=http://localhost:3001
+DB_URI=your_DB_uri
+JWT_SECRET=your_jwt_secret
+PORT=your_port
+NODE_ENV="production" or "development"
+CLIENT_URL=your_client_Deployed_link_for_cors
 ```
 
 ## Testing
@@ -187,5 +189,5 @@ npm run test:integration
 
 2. Using PM2 for process management:
    ```bash
-   pm2 start dist/server.js --name gov-chat-api
+   pm2 start dist/server.js --name civiklink
    ```
