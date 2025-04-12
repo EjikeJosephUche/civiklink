@@ -16,7 +16,6 @@ export const LoginUserSchema = z.object({
     role: z.enum(["OFFICIAL", "CITIZEN"], {
         required_error: "Role is required",
         invalid_type_error: "Role must be a string",
-        errorMap: () => ({ message: "Role must be either OFFICIAL or CITIZEN" })
     }).transform((val) => val.toUpperCase()),
 }).strict({
     message: "Additional fields are not allowed"
