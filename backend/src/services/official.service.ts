@@ -39,7 +39,7 @@ export default class OfficialService {
         return await OfficialModel.findOne({ email, role: "OFFICIAL" });
     }
     
-	async getOfficialsBySearch(searchWord: string, page: number, limit: number) {
+	async getOfficialsBySearch(searchWord: string = "", page: number, limit: number) {
 		// Logic to fetch officials by department from the database
 		const query = {
 			$or: [
@@ -60,7 +60,7 @@ export default class OfficialService {
 	) {
 		return await OfficialModel.findOneAndUpdate(
 			{ email, _id: userId, role },
-			data,
+			{ $set: data }, // Use $set to update only the specified fields
 			{
 				new: true,
 				runValidators: true,
