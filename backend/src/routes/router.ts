@@ -1,10 +1,27 @@
-import { Router } from "express";
-import authRoutes from "./user.routes"
+// import { Router } from "express";
+// import authRoutes from "./user.routes"
 
-const router = Router();
+// const router = Router();
 
-export default ():Router => {
+// export default ():Router => {
 
-    authRoutes(router);
-    return router;
-};
+//     authRoutes(router);
+//     return router;
+// };
+
+import express from "express";
+import authRouter from "./auth.route";
+import citizenRouter from "./user.routes";
+import officialRouter from "./official.route";
+import chatRouter from "./chat.route";
+
+export default function () {
+  const router = express.Router();
+
+  router.use("/api/auth", authRouter());
+  router.use("/api/citizen", citizenRouter());
+  router.use("/api/official", officialRouter());
+  router.use("/api/chat", chatRouter());
+
+  return router;
+}
