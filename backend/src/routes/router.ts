@@ -1,27 +1,30 @@
-// import { Router } from "express";
-// import authRoutes from "./user.routes"
-
-// const router = Router();
-
-// export default ():Router => {
-
-//     authRoutes(router);
-//     return router;
-// };
-
-import express from "express";
-import authRouter from "./auth.route";
+import { Router } from "express";
+import authRoutes from "./auth.routes";
 import citizenRouter from "./user.routes";
 import officialRouter from "./official.route";
 import chatRouter from "./chat.route";
 
-export default function () {
-  const router = express.Router();
+const router = Router();
 
-  router.use("/api/auth", authRouter());
-  router.use("/api/citizen", citizenRouter());
-  router.use("/api/official", officialRouter());
-  router.use("/api/chat", chatRouter());
+export default ():Router => {
 
-  return router;
-}
+    authRoutes("/api/auth", router);
+    citizenRouter("/api/citizen", router);
+    officialRouter("/api/oficial", router);
+    chatRouter("/api/chat", router);
+    return router;
+};
+
+// // import express from "express";
+// // import authRouter from "./auth.routes";
+
+
+// export default function (): Router {
+  
+//   router.use("/api/auth", authRouter(router));
+//   router.use("/api/citizen", citizenRouter(router));
+//   router.use("/api/official", officialRouter());
+//   router.use("/api/chat", chatRouter());
+
+//   return router;
+// }
