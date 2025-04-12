@@ -12,30 +12,23 @@ export const verifyToken = (
   const bearerToken = bearerHeader && bearerHeader[1];
 
   if (!bearerToken) {
-    res.status(401).send({
-      success: false,
-      message: "unauthorized",
-    });
-    return;
+    return next(new HttpError(401, "Unauthorized"));
   }
 
   try {
     req.user = verifyJwtToken(bearerToken);
     next();
   } catch (error) {
-    if (error instanceof HttpError) {
-      return next(error);
-    }
     next(new HttpError(403, "Forbidden"));
   }
 };
 
-export const verifyIsOfficial = (
+export const verifyIsRole = (role: string) => (
   req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
-  if (req.user?.role !== "OFFICIAL") {
+  if (req.user?.role !== role) {
     return next(new HttpError(403, "Forbidden. Access denied"));
   }
   next();
