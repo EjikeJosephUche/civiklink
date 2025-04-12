@@ -77,7 +77,7 @@ Built with Node.js, Express, MongoDB, and WebSocket for real-time communication.
 
 Real-time messaging is handled via WebSocket:
 
-```javascript
+```typescript
 // Client-side connection example
 const socket = new WebSocket(`ws://yourdomain.com/ws?token=${authToken}`);
 
@@ -126,7 +126,6 @@ Standard error responses:
 {
   "success": false,
   "message": "Error description",
-  "code": 400
 }
 ```
 
