@@ -35,7 +35,7 @@ body {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   padding-bottom: 5rem;
-  width: 70%;
+  min-width: 800px;
   border: none;
 }
 
@@ -336,4 +336,27 @@ details[open] .dropdownIcon {
 
 .footer-icons a:hover {
   color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .searchBar {
+    margin-top: 0.5rem;
+    padding-bottom: 2rem;
+    min-width: 200px;
+    border: none;
+  }
+  .heroTitle {
+    font-size: 33px;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    text-align: left;
+    padding: 3rem 1.5rem 0rem;
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    /* padding: 1rem; */
+  }
 }

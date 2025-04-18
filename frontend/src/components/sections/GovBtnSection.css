@@ -4,3 +4,13 @@
   align-items: center;
   padding: 42px 50px;
 }
+
+@media (max-width: 768px) {
+  .btn-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 42px 20px;
+  }
+}
