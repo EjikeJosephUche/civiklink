@@ -359,4 +359,11 @@ details[open] .dropdownIcon {
     text-align: left;
     /* padding: 1rem; */
   }
+
+  .newsContent {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 60px;
+    align-items: center;
+  }
 }
